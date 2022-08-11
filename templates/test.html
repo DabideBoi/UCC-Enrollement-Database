@@ -1,0 +1,57 @@
+<html>
+<body>
+<title>Movies Recommendation</title>
+<div>
+
+{% block content %}
+
+
+
+        <h2> Control Number </h2>
+        <h2 id="num"> {{number}} </h2>
+
+        <p>Check student's info: </p>
+        <h4>{{data | safe}}</h4>
+
+        <h5>Grade:</h5>
+        <h5 id="grade_level">{{grade_level | safe}}</h5>
+        <div name="shs-pane" style="visibility:{{ visible }}">
+                <form action="" method="POST" action="/" >
+                        <button name = "gender" value = Male type="submit">Male</button>
+                        <button name = "gender" value = Female type="submit">Female</button>
+                <h5>{{shs_strand | safe}}</h5>
+                        {% for section in sections %}
+                        <button name = "sectionz" value = {{section}} class="dropdown-item text-right" type="submit">{{section}}</button>
+                        {% endfor %}
+                </form>
+        </div>
+        <button type="submit" onclick="openWebsite()">Print Preview</button>
+        <form action="" method="post">
+                <input type="submit" name="upvote" value="Enroll" />
+        </form>
+            
+        
+
+{% endblock %}
+<script>
+        function openWebsite() {
+                var grade_level = document.getElementById('grade_level').innerHTML      
+                var form = '';
+                if(grade_level == 'Grade 11' ||  grade_level == 'Grade 12'){
+                    form = 'printformSeniorHigh';
+                }
+                else if(grade_level == 'Grade 7' ||  grade_level == 'Grade 8' || grade_level == 'Grade 9' ||  grade_level == 'Grade 10'){
+                    form = 'printformJuniorHigh';
+                }
+                else if(grade_level == 'Grade 1' ||  grade_level == 'Grade 2' || grade_level == 'Grade 3' ||  grade_level == 'Grade 4' ||  grade_level == 'Grade 5' || grade_level == 'Grade 6' ||  grade_level == 'Kinder'){
+                    form = 'printformElemHigh';
+                }
+                else
+                    form = 'printformCollege';
+
+                window.open("https://ucc.ph/" + form +"/?StudentID=" + document.getElementById("num").innerHTML);
+                }
+</script>
+</div>
+</body>
+</html>
